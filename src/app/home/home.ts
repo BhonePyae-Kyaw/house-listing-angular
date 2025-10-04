@@ -7,9 +7,9 @@ import { HousingService } from '../housing';
   imports: [HousingLocation],
   template: `
     <section>
-      <form>
-        <input type="text" placeholder="Filter by city" />
-        <button class="primary" type="button">Search</button>
+      <form (ngSubmit)="onFilterSearch($event)">
+        <input type="text" placeholder="Filter by city" #filter />
+        <button class="primary" type="button" (click)="onFilterSearch($event)">Search</button>
       </form>
     </section>
     <section class="results">
@@ -27,5 +27,11 @@ export class Home {
 
   constructor() {
     this.housingLocationList = this.housingService.getAllHousingLocations();
+  }
+
+  onFilterSearch(event: Event) {
+    event.preventDefault();
+    // Add your filter logic here
+    console.log('Filter search triggered');
   }
 }
